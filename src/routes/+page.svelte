@@ -28,6 +28,8 @@
 	<Counter />
 </section>
 
+<a href="tester"> Test Page</a>
+
 <style>
 	section {
 		display: flex;

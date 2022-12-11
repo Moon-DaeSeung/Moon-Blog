@@ -10,6 +10,6 @@
     cursor: text;
     display: flex;
     align-items: center;
-    margin: 0 3rem 1rem 3rem;
+    margin-bottom: 1rem;
   }
 </style>

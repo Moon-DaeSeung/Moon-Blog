@@ -16,5 +16,10 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true
-	}
+	},
+	rules: {
+    semi: [2, "never"],
+    quotes: [2, "double", "avoid-escape"],
+    "@typescript-eslint/no-explicit-any": ["off"],
+  },
 };

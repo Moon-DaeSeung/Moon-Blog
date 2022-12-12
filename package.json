@@ -21,7 +21,6 @@
 		"@typescript-eslint/parser": "^5.45.0",
 		"eslint": "^8.28.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"prettier-plugin-svelte": "^2.9.0",
 		"svelte": "^3.54.0",
 		"svelte-check": "^2.9.2",
 		"tslib": "^2.4.1",
@@ -30,7 +29,12 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^4.0.1",
+		"fusioncharts": "^3.19.0",
 		"katex": "^0.16.4",
+		"prettier": "^2.8.1",
+		"prettier-plugin-svelte": "^2.9.0",
+		"svelte-fusioncharts": "^1.0.0",
 		"svelte-lightbox": "^1.1.0"
 	}
 }

@@ -1,7 +1,6 @@
 <script>
   import Counter from "./Counter.svelte"
-  import welcome from "$lib/images/svelte-welcome.webp"
-  import welcome_fallback from "$lib/images/svelte-welcome.png"
+  import { page } from "$app/stores"
 </script>
 
 <svelte:head>
@@ -10,8 +9,7 @@
 </svelte:head>
 
 <section>
-  <a href="tester"> Test Page</a>
-  <a href="temp">temp</a>
+  <a href="page1">page1</a>
 </section>
 
 <style>

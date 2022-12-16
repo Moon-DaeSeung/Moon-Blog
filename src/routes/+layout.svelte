@@ -1,34 +1,69 @@
 <script lang="ts">
   import Header from "./Header.svelte"
-  import "./styles.css"
+  import "../app.css"
   import ErrorPage from "./+error.svelte"
   import routes from "./routes"
   import { page } from "$app/stores"
-  import { fade } from "svelte/transition"
+  import { cubicIn, cubicOut } from "svelte/easing"
+  import type { PageData } from "./$types"
+  import { beforeNavigate } from "$app/navigation"
 
-  $: ({
-    url: { pathname },
-  } = $page)
+  export let data: PageData
 
-  const availablePaths = Object.keys(routes)
+  let pathname = data.pathname
+  let [from, to]: [string, string | null] = [pathname, null]
+
+  $: {
+    pathname = $page.url.pathname
+  }
+
+  function pageOut(node: Element, { active }: { active: boolean }) {
+    const o = +getComputedStyle(node).opacity
+
+    return {
+      delay: 0,
+      duration: active ? 300 : 0,
+      css: (t, u) =>
+        `opacity: ${t * o}; transform: translateX(${-cubicOut(u) * 50}px)`,
+    }
+  }
+
+  function pageIn(node: Element, { active }: { active: boolean }) {
+    const o = +getComputedStyle(node).opacity
+
+    return {
+      delay: 0,
+      duration: active ? 300 : 0,
+      css: (t, u) =>
+        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 50}px)`,
+    }
+  }
+
+  $: current = routes[pathname] ?? { page: ErrorPage, notTranstionWith: [] }
+
+  beforeNavigate(({ from: _from, to: _to }) => {
+    ;[from, to] = [_from!.url.pathname, _to!.url.pathname]
+  })
+
+  $: {
+    ;[pathname]
+  }
 </script>
 
 <div class="app">
   <Header />
   <main>
-    {#each Object.entries(routes) as [path, Page]}
-      {#if path === pathname}
-        <div class="content" transition:fade>
-					<div class="contsraint">
-						<svelte:component this={Page} />
-					</div>
+    {#key pathname}
+      <div
+        class="content"
+        in:pageIn={{ active: !current.notTranstionWith.includes(from) }}
+        out:pageOut={{ active: !current.notTranstionWith.includes(from) }}
+      >
+        <div class="constraint">
+          <svelte:component this={current.page} />
         </div>
-      {/if}
-    {/each}
-
-    {#if !availablePaths.includes(pathname)}
-      <ErrorPage />
-    {/if}
+      </div>
+    {/key}
   </main>
 
   <footer>
@@ -52,6 +87,7 @@
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .content {
@@ -62,15 +98,15 @@
     flex-direction: column;
   }
 
-	.contsraint {
-		width: 100%;
-		max-width: 64rem;
+  .constraint {
+    width: 100%;
+    max-width: 64rem;
     min-height: 100%;
-		display: flex;
-		margin: 0 auto;
-		flex-direction: column;
-		flex: 1;
-	}
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    flex: 1;
+  }
 
   footer {
     display: flex;

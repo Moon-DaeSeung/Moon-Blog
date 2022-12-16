@@ -9,7 +9,7 @@
 </svelte:head>
 
 <section>
-  <a href="page1">page1</a>
+  <a href="/page1">page1</a>
 </section>
 
 <style>

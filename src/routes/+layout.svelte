@@ -7,6 +7,7 @@
   import { cubicIn, cubicOut } from "svelte/easing"
   import type { PageData } from "./$types"
   import { beforeNavigate } from "$app/navigation"
+  import BreadCrums from "./BreadCrums.svelte"
 
   export let data: PageData
 
@@ -52,15 +53,22 @@
 
 <div class="app">
   <Header />
+  <div class="constraint-wrapper mt-4 mb-20">
+    <div class="constraint">
+      <BreadCrums {pathname} />
+    </div>
+  </div>
   <main>
     {#key pathname}
       <div
-        class="content"
+        class="transition-area content"
         in:pageIn={{ active: !current.notTranstionWith.includes(from) }}
         out:pageOut={{ active: !current.notTranstionWith.includes(from) }}
       >
-        <div class="constraint">
-          <svelte:component this={current.page} />
+        <div class="constraint-wrapper content">
+          <div class="constraint content">
+            <svelte:component this={current.page} />
+          </div>
         </div>
       </div>
     {/key}
@@ -90,22 +98,25 @@
     overflow-x: hidden;
   }
 
-  .content {
+  .transition-area {
     position: absolute;
     width: 100%;
     min-height: 100%;
-    display: flex;
-    flex-direction: column;
+  }
+
+  .content {
+    @apply flex flex-col flex-grow;
+  }
+
+  .constraint-wrapper {
+    @apply flex flex-col;
   }
 
   .constraint {
     width: 100%;
     max-width: 64rem;
-    min-height: 100%;
-    display: flex;
     margin: 0 auto;
-    flex-direction: column;
-    flex: 1;
+    @apply px-6;
   }
 
   footer {

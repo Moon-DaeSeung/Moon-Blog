@@ -13,7 +13,7 @@
   .tmp {
     height: 300px;
     position: relative;
-    background-color: lightcoral;
+    background-color: lightblue;
     display: flex;
     flex-direction: column;
     gap: 4px;

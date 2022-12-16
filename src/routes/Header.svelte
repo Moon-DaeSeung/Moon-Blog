@@ -40,7 +40,7 @@
 
 <style>
   header {
-    @apply flex justify-between px-9 h-24 items-center;
+    @apply flex justify-between px-9 h-24 items-center shadow-md;
   }
 
   .corner {

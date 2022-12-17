@@ -1,5 +1,6 @@
 import idToslug from "../../../notion2svelte_id-to-slug.json"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const slugs = idToslug.map(([_, slug]) => slug)
 const notions = slugs.map(async (slug) => {
   const { get } = await import(`./${slug}/notion-export.js`)

@@ -1,8 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
-  import "boxicons"
-  import type { PageData } from "./$types"
 </script>
 
 <section>

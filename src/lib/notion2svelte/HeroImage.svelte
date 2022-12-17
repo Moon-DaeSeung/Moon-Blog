@@ -1,6 +1,5 @@
 <script>
-  import { getHeroTransition } from "$lib/context/heroTransition"
-  const {heroIn, heroOut} =getHeroTransition()
+  import { heroIn, heroOut } from "$lib/hero-transition"
   export let src = ""
   export let height = "100%"
   export let heroKey = src
@@ -27,5 +26,4 @@
     width: 100%;
     object-fit: cover;
   }
-
 </style>

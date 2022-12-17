@@ -1,7 +1,6 @@
 import Page1 from "./page1/+page.svelte"
 import Page2 from "./page2/+page.svelte"
 import Playground from "./playground/+page.svelte"
-import Playground_Nest from "./playground/nest/+page.svelte"
 import About from "./about/+page.svelte"
 import HOME from "./+page.svelte"
 import Blog from "./blog/+page.svelte"
@@ -25,10 +24,6 @@ const routes: {
   "/playground": {
     page: Playground,
     notTranstionWith: ["/playground/nest"],
-  },
-  "/playground/nest": {
-    page: Playground_Nest,
-    notTranstionWith: ["/playground"],
   },
   "/about": {
     page: About,

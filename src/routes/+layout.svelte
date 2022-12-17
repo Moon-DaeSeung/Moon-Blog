@@ -8,7 +8,6 @@
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
   import routes from "./routes"
-  import { initHeroTransition } from "$lib/context/heroTransition"
 
   export let data: LayoutServerData
 
@@ -50,13 +49,10 @@
     ;[from, to] = [_from!.url.pathname, _to!.url.pathname]
   })
 
-  // init-context
-  initHeroTransition()
-  //
 </script>
 
 <svelte:head>
-  <title>{title} | Techy Cat</title>
+  <title>{title} | Moon Blog</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={title} />
   <meta property="og:type" content="article" />

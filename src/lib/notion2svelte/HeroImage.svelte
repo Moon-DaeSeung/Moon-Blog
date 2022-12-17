@@ -7,8 +7,6 @@
 
 <img
   style="height: {height};"
-  in:pageIn={heroKey}
-  out:pageOut={heroKey}
   {src}
   alt="ARIA Fail. Sorry!"
 />

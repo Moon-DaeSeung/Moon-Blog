@@ -4,7 +4,7 @@
 
   export let coverURL = ""
   export let iconEmojiOrURL = ""
-  export let height = "18rem"
+  export let height = "24rem"
   export let k = "0rem"
 
   // Get rid of `null`s from the Notion API

@@ -36,8 +36,15 @@
 
 <div class="text-sm breadcrumbs">
   <ul>
-    {#each crumbs as { label, href }}
-      <li><a {href}>{label}</a></li>
+    {#each crumbs as { label, href }, i}
+      {@const isLast = i === crumbs.length - 1}
+      <li><a disabled={isLast} {href}>{label}</a></li>
     {/each}
   </ul>
 </div>
+
+<style>
+  a[disabled="true"] {
+    @apply opacity-50 pointer-events-none;
+  }
+</style>

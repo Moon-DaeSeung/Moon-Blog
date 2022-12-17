@@ -1,5 +1,5 @@
 <script>
-  export let number = 1;
+  export let number = "1";
 </script>
 
 <div><p><span>{number}.</span><slot /></p></div>

@@ -1,15 +1,14 @@
 import type { LayoutServerLoad } from "../$types"
 import posts from "./posts"
 
-export const load: LayoutServerLoad = async () => {
+export const load: LayoutServerLoad = async ({ url: { pathname } }) => {
+  const slug = pathname.replaceAll("/blog", "")
+  if (!slug) return { posts }
+  const post = posts.find((post) => "/" + post.slug === slug)
+  if (!post) return {}
   return {
     meta: {
-      title: "창의성 담론!",
-      description: "asdf",
-      image: {
-        url: "/assets/what-is-creativity/cover.js",
-        alt: "van gogh",
-      },
+      ...post,
     },
   }
 }

@@ -6,6 +6,7 @@ import About from "./about/+page.svelte"
 import HOME from "./+page.svelte"
 import Blog from "./blog/+page.svelte"
 import WhatIsCreativity from "./blog/what-is-creativity/+page.svelte"
+import idAndSlugs from "../notion2svelte_id-to-slug.json"
 
 const routes: {
   [key: string]: {
@@ -39,12 +40,38 @@ const routes: {
   },
   "/blog": {
     page: Blog,
-    notTranstionWith: ["/blog/what-is-creativity"] 
+    notTranstionWith: ["/blog/what-is-creativity"],
   },
   "/blog/what-is-creativity": {
     page: WhatIsCreativity,
-    notTranstionWith: ["/blog"] 
-  }
+    notTranstionWith: ["/blog"],
+  },
 }
 
-export default routes
+const blogs = await Promise.all(
+  idAndSlugs
+    .map(([_, slug]) => slug)
+    .map(async (slug) => {
+      const page = await (await import(`./blog/${slug}/+page.svelte`)).default
+      return {
+        path: `/blog/${slug}`,
+        page,
+        notTranstionWith: ["/blog"],
+      }
+    })
+)
+
+export default {
+  ...routes,
+  "/blog": {
+    ...routes["/blog"],
+    nonTransitionWith: blogs.map(({ path }) => path),
+  },
+  ...blogs.reduce(
+    (acc, { path, page, notTranstionWith }) => ({
+      ...acc,
+      [path]: { page, notTranstionWith },
+    }),
+    {}
+  ),
+}

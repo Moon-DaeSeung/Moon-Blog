@@ -1,52 +1,36 @@
 <script lang="ts">
+  import { page } from "$app/stores"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   import "boxicons"
-
-  const articles: {
-    thumbnail: string
-    title: string
-    content: string
-    time: string
-    slug: string
-  }[] = [
-    {
-      thumbnail: "/assets/what-is-creativity/cover.jpg",
-      title: "노션 주간 회의록, 업무 일지 어떻게 사용하고 계신가요?",
-      content: `
-        노션을 업무에 사용 중이신가요? 주간 플래너, 견적서, 여행 계획,
-        프로젝트 관리, 고객 관리, 매출 관리 등 다양한 형태로 노션을
-        활용하고…
-      `,
-      time: "2022/11/14",
-      slug: "what-is-creativity",
-    },
-  ]
+  import type { PageData } from "./$types"
 </script>
 
 <section>
   <div class="pb-4 border-b">BLOG</div>
   <ul>
-    {#each articles as { title, content, time, slug, thumbnail }}
+    {#each $page?.data.posts || [] as { title, description, time, slug, image, hashtags }}
       {@const href = "/blog/" + slug}
       <li>
         <article>
           <a {href}>
-            <HeroImage src={thumbnail} height="200px" />
+            <HeroImage src={image.url} height="200px" />
           </a>
           <div class="px-6 py-7 h-[360px] flex flex-col">
             <div class="flex gap-3 mt-6 justify-center">
-              {#each ["notion"] as badge}
-                <div class="badge badge-outline">{badge}</div>
+              {#each hashtags as { name }}
+                <div class="badge badge-outline">{name}</div>
               {/each}
             </div>
             <h2 class="mt-4">
-              {title}
+              <a {href}>
+                {title}
+              </a>
             </h2>
             <time class="mt-2 flex justify-end text-xs text-base-300">
               {time}
             </time>
             <p class="mt-5 text-center">
-              {content}
+              {description}
             </p>
             <a {href} class="btn btn-primary rounded-2xl mx-auto mt-auto">
               READ MORE
@@ -64,7 +48,7 @@
   }
 
   ul {
-    @apply flex gap-4 mt-9;
+    @apply flex gap-10 mt-9 flex-wrap;
   }
 
   section {
@@ -73,6 +57,13 @@
 
   article {
     @apply flex flex-col w-[355px] border;
+  }
+
+  p {
+    @apply h-[100px] overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
   .content {

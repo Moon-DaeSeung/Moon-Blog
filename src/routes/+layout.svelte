@@ -2,12 +2,12 @@
   import Header from "./Header.svelte"
   import "../app.css"
   import ErrorPage from "./+error.svelte"
-  import routes from "./routes"
   import { page } from "$app/stores"
   import { cubicIn, cubicOut } from "svelte/easing"
   import type { LayoutServerData } from "./$types"
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
+  import routes from "./routes"
 
   export let data: LayoutServerData
 

@@ -2,7 +2,7 @@ const json = {
   "object": "page",
   "id": "12c1b504-c75e-4f3a-9964-50227238d8e7",
   "created_time": "2022-12-11T06:15:00.000Z",
-  "last_edited_time": "2022-12-17T00:46:00.000Z",
+  "last_edited_time": "2022-12-17T06:46:00.000Z",
   "created_by": {
     "object": "user",
     "id": "95fc0174-8fc6-4114-8e45-f67eacd99f07"
@@ -24,6 +24,22 @@ const json = {
   },
   "archived": false,
   "properties": {
+    "HashTags": {
+      "id": "Hhkx",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "qO\\]",
+          "name": "서평",
+          "color": "purple"
+        },
+        {
+          "id": "bf7e07e6-cb34-424b-849a-78c98a062ea0",
+          "name": "개발",
+          "color": "default"
+        }
+      ]
+    },
     "생성 일시": {
       "id": "J%7C%3BZ",
       "type": "created_time",
@@ -48,6 +64,220 @@ const json = {
             "color": "default"
           },
           "plain_text": "what-is-creativity",
+          "href": null
+        }
+      ]
+    },
+    "Description": {
+      "id": "qTV%3E",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "창의성",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "창의성",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "(創意性, ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "(創意性, ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "문화어",
+            "link": {
+              "url": "https://ko.wikipedia.org/wiki/%EB%AC%B8%ED%99%94%EC%96%B4"
+            }
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "문화어",
+          "href": "https://ko.wikipedia.org/wiki/%EB%AC%B8%ED%99%94%EC%96%B4"
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": ": 창발성, ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": ": 창발성, ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "영어",
+            "link": {
+              "url": "https://ko.wikipedia.org/wiki/%EC%98%81%EC%96%B4"
+            }
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "영어",
+          "href": "https://ko.wikipedia.org/wiki/%EC%98%81%EC%96%B4"
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": ": creativity)은 새로운 생각이나 개념을 찾아내거나 기존에 있던 생각이나 개념들을 새롭게 조합해 내는 것과 연관된 정신적이고 사회적인 과정이다. ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": ": creativity)은 새로운 생각이나 개념을 찾아내거나 기존에 있던 생각이나 개념들을 새롭게 조합해 내는 것과 연관된 정신적이고 사회적인 과정이다. ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "창조성",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "창조성",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "(創造性)이라고도 하며 이에 관한 능력을 ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "(創造性)이라고도 하며 이에 관한 능력을 ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "창의력",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "창의력",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "(創意力), ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "(創意力), ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "창조력",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "창조력",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "創造力)이라고 한다.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "創造力)이라고 한다.",
           "href": null
         }
       ]

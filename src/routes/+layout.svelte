@@ -8,6 +8,7 @@
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
   import routes from "./routes"
+  import { initHeroTransition } from "$lib/context/heroTransition"
 
   export let data: LayoutServerData
 
@@ -49,9 +50,9 @@
     ;[from, to] = [_from!.url.pathname, _to!.url.pathname]
   })
 
-  $: {
-    ;[pathname]
-  }
+  // init-context
+  initHeroTransition()
+  //
 </script>
 
 <svelte:head>
@@ -62,7 +63,7 @@
   <meta property="og:image" content={image.url} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:description" content={description} />
-  <meta property="og:site_name" content="Techy Cat" />
+  <meta property="og:site_name" content="Moon Blog" />
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 

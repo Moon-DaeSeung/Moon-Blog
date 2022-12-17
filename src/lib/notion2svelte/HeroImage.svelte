@@ -1,5 +1,6 @@
 <script>
-  import { pageIn, pageOut } from "$lib/hero-transition"
+  import { getHeroTransition } from "$lib/context/heroTransition"
+  const {heroIn, heroOut} =getHeroTransition()
   export let src = ""
   export let height = "100%"
   export let heroKey = src
@@ -7,6 +8,8 @@
 
 <img
   style="height: {height};"
+  in:heroIn={heroKey}
+  out:heroOut={heroKey}
   {src}
   alt="ARIA Fail. Sorry!"
 />

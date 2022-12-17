@@ -5,17 +5,17 @@
   import routes from "./routes"
   import { page } from "$app/stores"
   import { cubicIn, cubicOut } from "svelte/easing"
-  import type { PageData } from "./$types"
+  import type { LayoutServerData } from "./$types"
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
 
-  export let data: PageData
+  export let data: LayoutServerData
 
-  let pathname = data.pathname
+  let pathname = decodeURI(data.pathname)
   let [from, to]: [string, string | null] = [pathname, null]
 
   $: {
-    pathname = $page.url.pathname
+    pathname = decodeURI($page.url.pathname)
   }
 
   function pageOut(node: Element, { active }: { active: boolean }) {
@@ -41,6 +41,9 @@
   }
 
   $: current = routes[pathname] ?? { page: ErrorPage, notTranstionWith: [] }
+  $: title = $page.data.meta?.title ?? data.defaultMeta.title
+  $: description = $page.data.meta?.description ?? data.defaultMeta.description
+  $: image = $page.data.meta?.image ?? data.defaultMeta.image
 
   beforeNavigate(({ from: _from, to: _to }) => {
     ;[from, to] = [_from!.url.pathname, _to!.url.pathname]
@@ -51,9 +54,21 @@
   }
 </script>
 
+<svelte:head>
+  <title>{title} | Techy Cat</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content={image.url} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="Techy Cat" />
+  <meta name="twitter:image:alt" content={image.alt} />
+</svelte:head>
+
 <div class="app">
   <Header />
-  <div class="constraint-wrapper mt-4 mb-20">
+  <div class="constraint-wrapper mt-4 mb-16">
     <div class="constraint">
       <BreadCrums {pathname} />
     </div>
@@ -114,7 +129,7 @@
 
   .constraint {
     width: 100%;
-    max-width: 64rem;
+    max-width: 68rem;
     margin: 0 auto;
     @apply px-6;
   }

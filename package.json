@@ -42,6 +42,7 @@
 		"prettier-plugin-svelte": "^2.9.0",
 		"shared-transition": "^0.0.1",
 		"svelte-fusioncharts": "^1.0.0",
-		"svelte-lightbox": "^1.1.0"
+		"svelte-lightbox": "^1.1.0",
+		"svelte-preprocess-import-assets": "^0.2.5"
 	}
 }

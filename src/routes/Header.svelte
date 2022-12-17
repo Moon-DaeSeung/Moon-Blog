@@ -17,6 +17,9 @@
       <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
         <a href="/">Home</a>
       </li>
+      <li aria-current={$page.url.pathname === "/blog" ? "page" : undefined}>
+        <a href="/blog">Blog</a>
+      </li>
       <li aria-current={$page.url.pathname === "/about" ? "page" : undefined}>
         <a href="/about">About</a>
       </li>
@@ -40,7 +43,7 @@
 
 <style>
   header {
-    @apply flex justify-between px-9 h-24 items-center shadow-md;
+    @apply flex justify-between px-9 h-24 items-center shadow-sm border-b;
   }
 
   .corner {

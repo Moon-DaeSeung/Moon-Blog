@@ -5,8 +5,8 @@ on:
   pull_request:
     branches: [main, master]
 env:
-  PUBLIC_SENTRY_ENABLED: false
-  PUBLIC_SENTRY_DNS: "nothing"
+  PUBLIC_SENTRY_ENABLED: ${{ secrets.PUBLIC_SENTRY_ENABLED }}
+  PUBLIC_SENTRY_DNS: ${{ secrets.PUBLIC_SENTRY_DNS }}
 
 jobs:
   test:

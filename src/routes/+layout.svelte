@@ -82,7 +82,7 @@
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 
-<div class="app">
+<div class="app ">
   <Header />
   <div class="constraint-wrapper mt-4 mb-16">
     <div class="constraint">
@@ -114,7 +114,7 @@
 
 <style>
   .app {
-    @apply flex flex-col min-h-screen overflow-x-hidden;
+    @apply flex flex-col min-h-screen;
   }
 
   main {

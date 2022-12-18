@@ -13,11 +13,14 @@ export function heroIn(node: Element, key: string): any {
 
 export function heroOut(node: Element, key: string): any {
   const fn = send(node, { key })
-  return () => noFade(fn())
+  return () =>
+    [dodgeBug, noFade].reduce(
+      (prevConfig, process) => process(prevConfig),
+      fn()
+    )
 }
 
 function noFade(transition: TransitionConfig) {
-  if (!transition) throw { message: "config must not be undefined" }
   return {
     ...transition,
     css: (t: number, u: number) => {

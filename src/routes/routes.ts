@@ -4,42 +4,37 @@ import Playground from "./playground/+page.svelte"
 import About from "./about/+page.svelte"
 import HOME from "./+page.svelte"
 import Blog from "./blog/+page.svelte"
-import WhatIsCreativity from "./blog/what-is-creativity/+page.svelte"
 import idAndSlugs from "../notion2svelte_id-to-slug.json"
 
 const routes: {
   [key: string]: {
     page: any
-    notTranstionWith: string[]
+    notTransitionWith: string[]
   }
 } = {
   "/page1": {
     page: Page1,
-    notTranstionWith: [],
+    notTransitionWith: [],
   },
   "/page2": {
     page: Page2,
-    notTranstionWith: [],
+    notTransitionWith: [],
   },
   "/playground": {
     page: Playground,
-    notTranstionWith: ["/playground/nest"],
+    notTransitionWith: ["/playground/nest"],
   },
   "/about": {
     page: About,
-    notTranstionWith: [],
+    notTransitionWith: [],
   },
   "/": {
     page: HOME,
-    notTranstionWith: [],
+    notTransitionWith: [],
   },
   "/blog": {
     page: Blog,
-    notTranstionWith: ["/blog/what-is-creativity"],
-  },
-  "/blog/what-is-creativity": {
-    page: WhatIsCreativity,
-    notTranstionWith: ["/blog"],
+    notTransitionWith: [],
   },
 }
 
@@ -52,7 +47,7 @@ const blogs = await Promise.all(
       return {
         path: `/blog/${slug}`,
         page,
-        notTranstionWith: ["/blog"],
+        notTransitionWith: ["/blog"],
       }
     })
 )
@@ -61,12 +56,12 @@ export default {
   ...routes,
   "/blog": {
     ...routes["/blog"],
-    nonTransitionWith: blogs.map(({ path }) => path),
+    notTransitionWith: blogs.map(({ path }) => path),
   },
   ...blogs.reduce(
-    (acc, { path, page, notTranstionWith }) => ({
+    (acc, { path, page, notTransitionWith }) => ({
       ...acc,
-      [path]: { page, notTranstionWith },
+      [path]: { page, notTransitionWith },
     }),
     {}
   ),

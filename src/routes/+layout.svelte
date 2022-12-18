@@ -12,11 +12,20 @@
   export let data: LayoutServerData
 
   let pathname = decodeURI(data.pathname)
-  let [from, to]: [string, string | null] = [pathname, null]
+  let [from, to]: [string, string] = [pathname, pathname]
 
   $: {
     pathname = decodeURI($page.url.pathname)
   }
+
+  $: current = routes[pathname] ?? { page: ErrorPage, notTransitionWith: [] }
+  $: title = $page.data.meta?.title ?? data.defaultMeta.title
+  $: description = $page.data.meta?.description ?? data.defaultMeta.description
+  $: image = $page.data.meta?.image ?? data.defaultMeta.image
+
+  beforeNavigate(({ from: _from, to: _to }) => {
+    ;[from, to] = [decodeURI(_from!.url.pathname), decodeURI(_to!.url.pathname)]
+  })
 
   function pageOut(node: Element, { active }: { active: boolean }) {
     const o = +getComputedStyle(node).opacity
@@ -25,7 +34,9 @@
       delay: 0,
       duration: active ? 300 : 0,
       css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${-cubicOut(u) * 50}px)`,
+        `opacity: ${t * o}; transform: translateX(${
+          -cubicOut(u) * 50
+        }px); z-index: -1`,
     }
   }
 
@@ -36,19 +47,11 @@
       delay: 0,
       duration: active ? 300 : 0,
       css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 50}px)`,
+        `opacity: ${t * o}; transform: translateX(${
+          cubicIn(u) * 50
+        }px); z-index: 1`,
     }
   }
-
-  $: current = routes[pathname] ?? { page: ErrorPage, notTranstionWith: [] }
-  $: title = $page.data.meta?.title ?? data.defaultMeta.title
-  $: description = $page.data.meta?.description ?? data.defaultMeta.description
-  $: image = $page.data.meta?.image ?? data.defaultMeta.image
-
-  beforeNavigate(({ from: _from, to: _to }) => {
-    ;[from, to] = [_from!.url.pathname, _to!.url.pathname]
-  })
-
 </script>
 
 <svelte:head>
@@ -73,9 +76,10 @@
   <main>
     {#key pathname}
       <div
+        id={pathname}
         class="transition-area content"
-        in:pageIn={{ active: !current.notTranstionWith.includes(from) }}
-        out:pageOut={{ active: !current.notTranstionWith.includes(from) }}
+        in:pageIn={{ active: !current.notTransitionWith.includes(from) }}
+        out:pageOut={{ active: !current.notTransitionWith.includes(from) }}
       >
         <div class="constraint-wrapper content">
           <div class="constraint content">

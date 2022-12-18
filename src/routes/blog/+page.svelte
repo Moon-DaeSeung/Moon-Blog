@@ -1,12 +1,13 @@
 <script lang="ts">
   import { page } from "$app/stores"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
+  let posts = $page.data.posts
 </script>
 
 <section>
   <div class="pb-4 border-b">BLOG</div>
   <ul>
-    {#each $page?.data.posts || [] as { title, description, time, slug, image, hashtags }}
+    {#each posts || [] as { title, description, time, slug, image, hashtags }}
       {@const href = "/blog/" + slug}
       <li>
         <article>

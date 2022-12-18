@@ -9,7 +9,7 @@
   <ul>
     {#each posts || [] as { title, description, time, slug, image, hashtags }}
       {@const href = "/blog/" + slug}
-      <li>
+      <li id={slug}>
         <article>
           <a {href}>
             <HeroImage src={image.url} height="200px" />

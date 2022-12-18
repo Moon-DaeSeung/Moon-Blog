@@ -1,8 +1,7 @@
 import type { LayoutServerLoad } from "./$types"
+export const prerender = true
 
-export const load: LayoutServerLoad = async ({
-  url: { pathname, origin, },
-}) => {
+export const load: LayoutServerLoad = async ({ url: { pathname, origin } }) => {
   return {
     pathname,
     defaultMeta: {

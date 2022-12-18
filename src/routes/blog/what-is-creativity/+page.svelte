@@ -45,8 +45,10 @@
   <Quote><strong>창의성</strong>(創意性, <Link type="absolute" href='https://ko.wikipedia.org/wiki/%EB%AC%B8%ED%99%94%EC%96%B4'>문화어</Link>: 창발성, <Link type="absolute" href='https://ko.wikipedia.org/wiki/%EC%98%81%EC%96%B4'>영어</Link>: creativity)은 새로운 생각이나 개념을 찾아내거나 기존에 있던 생각이나 개념들을 새롭게 조합해 내는 것과 연관된 정신적이고 사회적인 과정이다. <strong>창조성</strong>(創造性)이라고도 하며 이에 관한 능력을 <strong>창의력</strong>(創意力), <strong>창조력</strong>創造力)이라고 한다.</Quote><Paragraph blockProps={{"pageId":"12c1b504c75e4f3a996450227238d8e7","id":"7bffb69f-ac8c-4cd6-b7d3-f4767ccfb82d","created_time":"2022-12-15T04:12:00.000Z","last_edited_time":"2022-12-15T04:13:00.000Z"}}>
 
 </Paragraph>
-<Embed url="https://miro.com/app/board/uXjVP5BBISs=/"></Embed><Paragraph blockProps={{"pageId":"12c1b504c75e4f3a996450227238d8e7","id":"ec584551-ebc1-4bf7-a0ca-dcf66a227e27","created_time":"2022-12-15T04:22:00.000Z","last_edited_time":"2022-12-15T04:22:00.000Z"}}>
-
+<Embed url="https://miro.com/app/board/uXjVP5BBISs=/"></Embed><Toggle>temp
+<span slot="children"><Paragraph blockProps={{"pageId":"12c1b504c75e4f3a996450227238d8e7","id":"ee6283ab-e8e9-4ded-9e7a-dd43704b1ccd","created_time":"2022-12-18T10:48:00.000Z","last_edited_time":"2022-12-18T10:48:00.000Z"}}>
+asdf
 </Paragraph>
-
+</span></Toggle><Toggle>
+<span slot="children"></span></Toggle>
   

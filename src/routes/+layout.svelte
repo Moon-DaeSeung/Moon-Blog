@@ -8,11 +8,15 @@
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
   import routes from "./routes"
+  import { onMount } from "svelte"
+  import * as Sentry from "@sentry/svelte"
+  import { PUBLIC_SENTRY_DNS, PUBLIC_SENTRY_ENABLED } from "$env/static/public"
+  import { BrowserTracing } from "@sentry/tracing"
 
   export let data: LayoutServerData
 
   let pathname = decodeURI(data.pathname)
-  let [from, to]: [string, string] = [pathname, pathname]
+  let from = pathname
 
   $: {
     pathname = decodeURI($page.url.pathname)
@@ -23,8 +27,20 @@
   $: description = $page.data.meta?.description ?? data.defaultMeta.description
   $: image = $page.data.meta?.image ?? data.defaultMeta.image
 
+  onMount(() => {
+    Sentry.init({
+      dsn: PUBLIC_SENTRY_DNS,
+      enabled: PUBLIC_SENTRY_ENABLED === "true",
+      tracesSampleRate: 1.0,
+      integrations: [new BrowserTracing()],
+    })
+    Sentry.configureScope((scope) => {
+      scope.setTag("place", "client side")
+    })
+  })
+
   beforeNavigate(({ from: _from, to: _to }) => {
-    ;[from, to] = [decodeURI(_from!.url.pathname), decodeURI(_to!.url.pathname)]
+    from = decodeURI(_from!.url.pathname)
   })
 
   function pageOut(node: Element, { active }: { active: boolean }) {

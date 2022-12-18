@@ -1,19 +1,16 @@
 <script>
-  import IndentGroup from './IndentGroup.svelte';
-
-  let open = false;
+  import IndentGroup from "./IndentGroup.svelte"
+  let open = false
 </script>
 
 <div>
   <div>
-    <span class="toggle" on:click|stopPropagation={() => (open = !open)}>
-      <svg
-        viewBox="0 0 100 100"
-        style="width: 0.8rem; height: 1rem; display: block; fill: inherit; transition: transform 200ms ease-out 0s; transform: rotateZ({open
-          ? 180
-          : 90}deg); opacity: 1;"><polygon points="5.9,88.2 50,11.8 94.1,88.2" /></svg
-      >
-    </span>
+    <button on:click|stopPropagation={() => (open = !open)}>
+      <svg viewBox="0 0 2 3" aria-hidden="true">
+        <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+        <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+      </svg>
+    </button>
     <slot />
   </div>
   {#if open}
@@ -28,10 +25,16 @@
   /* border: solid double 0.5px wheat;
 		background: radial-gradient(coral, wheat); */
   /* } */
-  span {
-    cursor: pointer;
-    display: inline-block;
+  button {
     width: 1.5rem;
     text-align: center;
+  }
+  svg {
+    width: 30px;
+    height: 15px;
+    display: block;
+  }
+  path {
+    fill: black;
   }
 </style>

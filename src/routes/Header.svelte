@@ -34,7 +34,7 @@
   </nav>
 
   <div class="corner">
-    <a href="https://github.com/Moon-DaeSeung">
+    <a href="https://github.com/Moon-DaeSeung/Moon-Blog">
       <img src={github} alt="GitHub" />
     </a>
   </div>

@@ -52,7 +52,7 @@
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${
           -cubicOut(u) * 50
-        }px); z-index: -1`,
+        }px); z-index: -1; position: absolute;`,
     }
   }
 
@@ -82,7 +82,7 @@
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 
-<div class="app">
+<div class="app ">
   <Header />
   <div class="constraint-wrapper mt-4 mb-16">
     <div class="constraint">
@@ -105,7 +105,6 @@
       </div>
     {/key}
   </main>
-
   <footer>
     <p>
       visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
@@ -115,25 +114,15 @@
 
 <style>
   .app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    @apply flex flex-col min-h-screen;
   }
 
   main {
-    flex: 1;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
+    @apply w-full relative flex-1 flex flex-col;
   }
 
   .transition-area {
-    position: absolute;
-    width: 100%;
-    min-height: 100%;
+    @apply min-h-full w-full;
   }
 
   .content {

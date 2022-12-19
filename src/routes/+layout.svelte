@@ -53,7 +53,7 @@
 
   function resolveUrl(url: string) {
     if (url.includes("http")) return url
-    return $page.url.origin + url
+    return data.origin + url
   }
 
   onMount(() => {
@@ -77,7 +77,7 @@
   <title>{title} | Moon Blog</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={title} />
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   <meta property="og:image" content={resolveUrl(image.url)} />
   <meta property="og:site_name" content="Moon Blog" />
   <meta property="og:description" content={description} />

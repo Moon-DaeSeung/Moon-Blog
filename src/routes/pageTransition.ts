@@ -9,7 +9,7 @@ export const laptop = {
       duration: active ? 300 : 0,
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${
-          -cubicOut(u) * 20
+          -cubicOut(u) * 40
         }px); z-index: -1; position: absolute;`,
     }
   },
@@ -20,7 +20,7 @@ export const laptop = {
       delay: 0,
       duration: active ? 300 : 0,
       css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 20}px);`,
+        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 40}px);`,
     }
   },
 }
@@ -34,7 +34,7 @@ export const mobile = {
       duration: active ? 300 : 0,
       css: (t, u) =>
         `transform: translateX(${
-          -cubicOut(u) * 480
+          -cubicOut(u) * width
         }px); z-index: -1; position: absolute;`,
     }
   },
@@ -44,7 +44,7 @@ export const mobile = {
     return {
       delay: 0,
       duration: active ? 300 : 0,
-      css: (t, u) => `transform: translateX(${cubicIn(u) * 480}px);`,
+      css: (t, u) => `transform: translateX(${cubicIn(u) * width}px);`,
     }
   },
 }

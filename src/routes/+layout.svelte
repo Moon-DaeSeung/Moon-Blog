@@ -94,7 +94,7 @@
       </div>
     {/if}
   </MediaQuery>
-  <main>
+  <main class="overflow-hidden pb-[100px] lg:pb-0">
     {#key pathname}
       <div
         id={pathname}

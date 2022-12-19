@@ -12,6 +12,31 @@
   import * as Sentry from "@sentry/svelte"
   import { PUBLIC_SENTRY_DNS, PUBLIC_SENTRY_ENABLED } from "$env/static/public"
   import { BrowserTracing } from "@sentry/tracing"
+  import MediaQuery from "$lib/component/MediaQuery.svelte"
+  import MediaQueryUtils from "$lib/util/MediaQueryUtils"
+  import { mobile, laptop } from "./pageTransition"
+
+  let matches = false
+
+  $: ({ pageIn, pageOut } = matches ? laptop : mobile)
+
+  const navigators = [
+    {
+      href: "/",
+      name: "Home",
+      iconClass: "bx bx-home",
+    },
+    {
+      href: "/blog",
+      name: "Blog",
+      iconClass: "bx bxl-blogger",
+    },
+    {
+      href: "/about",
+      name: "About",
+      iconClass: "bx bx-face",
+    },
+  ]
 
   export let data: LayoutServerData
 
@@ -42,32 +67,6 @@
   beforeNavigate(({ from: _from, to: _to }) => {
     from = decodeURI(_from!.url.pathname)
   })
-
-  function pageOut(node: Element, { active }: { active: boolean }) {
-    const o = +getComputedStyle(node).opacity
-
-    return {
-      delay: 0,
-      duration: active ? 300 : 0,
-      css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${
-          -cubicOut(u) * 50
-        }px); z-index: -1; position: absolute;`,
-    }
-  }
-
-  function pageIn(node: Element, { active }: { active: boolean }) {
-    const o = +getComputedStyle(node).opacity
-
-    return {
-      delay: 0,
-      duration: active ? 300 : 0,
-      css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${
-          cubicIn(u) * 50
-        }px); z-index: 1`,
-    }
-  }
 </script>
 
 <svelte:head>
@@ -82,13 +81,19 @@
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 
+<MediaQuery query={MediaQueryUtils.laptop} bind:matches />
+
 <div class="app ">
   <Header />
-  <div class="constraint-wrapper mt-4 mb-16">
-    <div class="constraint">
-      <BreadCrums {pathname} />
-    </div>
-  </div>
+  <MediaQuery query={MediaQueryUtils.laptop} let:matches>
+    {#if matches}
+      <div class="constraint-wrapper mt-4 mb-16">
+        <div class="constraint">
+          <BreadCrums {pathname} />
+        </div>
+      </div>
+    {/if}
+  </MediaQuery>
   <main>
     {#key pathname}
       <div
@@ -98,17 +103,40 @@
         out:pageOut={{ active: !current.notTransitionWith.includes(from) }}
       >
         <div class="constraint-wrapper content">
-          <div class="constraint content">
+          <div class="constraint content lg:px-6 px-4">
             <svelte:component this={current.page} />
           </div>
         </div>
       </div>
     {/key}
   </main>
-  <footer>
-    <p>
-      visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
-    </p>
+  <footer class="fixed bottom-0 lg:static w-full">
+    <MediaQuery query={MediaQueryUtils.laptop} let:matches>
+      {#if !matches}
+        <nav class="shadow-md border-t w-full bg-white">
+          <ul class="relative flex justify-around items-center gap-12 p-2">
+            {#each navigators as { href, name, iconClass }}
+              {@const active =
+                (pathname === "/" && href === "/") ||
+                (href !== "/" && pathname.includes(href))}
+              <li
+                class:text-primary={active}
+                aria-current={pathname.includes(href)}
+              >
+                <a {href} class="flex flex-col items-center justify-center">
+                  <i class={`${iconClass} text-4xl`} />
+                  <span class="text-sm">{name}</span>
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+      {:else}
+        <p>
+          visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
+        </p>
+      {/if}
+    </MediaQuery>
   </footer>
 </div>
 
@@ -135,26 +163,7 @@
 
   .constraint {
     width: 100%;
-    max-width: 68rem;
+    max-width: 68em;
     margin: 0 auto;
-    @apply px-6;
-  }
-
-  footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 12px;
-  }
-
-  footer a {
-    font-weight: bold;
-  }
-
-  @media (min-width: 480px) {
-    footer {
-      padding: 12px 0;
-    }
   }
 </style>

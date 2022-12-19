@@ -6,7 +6,7 @@
   let mql: any
   let mqlListener: any
   let wasMounted = false
-  let matches = false
+  export let matches = false
 
   interface $$Slots {
     default: {

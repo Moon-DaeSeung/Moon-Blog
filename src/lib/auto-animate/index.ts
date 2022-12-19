@@ -343,8 +343,8 @@ export function getTransitionSizes(
  */
 function getOptions(el: Element): AutoAnimateOptions | AutoAnimationPlugin {
   return TGT in el && options.has((el as Element & { __aa_tgt: Element })[TGT])
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    ? options.get((el as Element & { __aa_tgt: Element })[TGT])!
+    ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      options.get((el as Element & { __aa_tgt: Element })[TGT])!
     : { duration: 250, easing: "ease-in-out" }
 }
 

@@ -1,15 +1,19 @@
 <script lang="ts">
   import { page } from "$app/stores"
+  import autoAnimate from "$lib/auto-animate"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   let posts = $page.data.posts
 </script>
 
-<section>
-  <div class="pb-4 border-b">BLOG</div>
-  <ul>
-    {#each posts || [] as { title, description, time, slug, image, hashtags }}
+<section class="flex flex-col flex-grow">
+  <div class="pb-4 border-b mt-4 lg:mt-0">BLOG</div>
+  <ul class="card-list" use:autoAnimate>
+    {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}
-      <li id={slug}>
+      <li
+        id={slug}
+        class="flex flex-col w-full flex-grow md:max-w-[320px] border shadow-md"
+      >
         <article>
           <a {href}>
             <HeroImage src={image.url} height="200px" />
@@ -46,18 +50,6 @@
     @apply text-[22px] leading-7 text-center;
   }
 
-  ul {
-    @apply flex gap-10 mt-9 flex-wrap;
-  }
-
-  section {
-    @apply flex flex-col flex-grow;
-  }
-
-  article {
-    @apply flex flex-col w-[355px] border;
-  }
-
   p {
     @apply h-[100px] overflow-hidden text-ellipsis;
     display: -webkit-box;
@@ -65,7 +57,22 @@
     -webkit-box-orient: vertical;
   }
 
-  .content {
-    @apply flex flex-col px-6 py-7 items-center;
+  .card-list {
+    @apply flex flex-wrap relative w-full gap-10 mt-9 mx-auto;
+    /* gap-9 */
+  }
+
+  /* @media (min-width: 447px) {
+    .card-list {
+      max-width: 415px;
+    }
+  }
+*/
+
+  /* 카드가 두줄일때 */
+  @media (max-width: 1088px) {
+    .card-list {
+      max-width: 680px;
+    }
   }
 </style>

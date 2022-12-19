@@ -4,8 +4,11 @@ module.exports = {
     "./src/**/*.{html,js,svelte,ts}",
     "./node_modules/stwui/**/*.{svelte,js,ts,html}",
   ],
+  daisyui: {
+    themes: ["bumblebee"],
+  },
   theme: {
     extend: {},
   },
-  plugins: [require("stwui/plugin"), require("daisyui")],
+  plugins: [require("daisyui")],
 }

@@ -3,7 +3,6 @@
   import "../app.css"
   import ErrorPage from "./+error.svelte"
   import { page } from "$app/stores"
-  import { cubicIn, cubicOut } from "svelte/easing"
   import type { LayoutServerData } from "./$types"
   import { beforeNavigate } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
@@ -52,6 +51,11 @@
   $: description = $page.data.meta?.description ?? data.defaultMeta.description
   $: image = $page.data.meta?.image ?? data.defaultMeta.image
 
+  function resolveUrl(url: string) {
+    if (url.includes("http")) return url
+    return $page.url.origin + url
+  }
+
   onMount(() => {
     Sentry.init({
       dsn: PUBLIC_SENTRY_DNS,
@@ -74,7 +78,7 @@
   <meta name="description" content={description} />
   <meta property="og:title" content={title} />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content={image.url} />
+  <meta property="og:image" content={resolveUrl(image.url)} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:description" content={description} />
   <meta property="og:site_name" content="Moon Blog" />

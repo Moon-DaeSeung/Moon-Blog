@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async ({ url: { pathname } }) => {
       title: "Welcom",
       description: "나의 일상을 적는 곳!",
       image: {
-        url: "/assets/thumbnail.jpg",
+        url: "/thumbnail.jpg",
         alt: "van gogh",
       },
     },

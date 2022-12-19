@@ -79,9 +79,9 @@
   <meta property="og:title" content={title} />
   <meta property="og:type" content="article" />
   <meta property="og:image" content={resolveUrl(image.url)} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:description" content={description} />
   <meta property="og:site_name" content="Moon Blog" />
+  <meta property="og:description" content={description} />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 

@@ -43,6 +43,10 @@
     from = decodeURI(_from!.url.pathname)
   })
 
+  onMount(() => {
+    console.log(document.scrollingElement?.scrollTop)
+  })
+
   function pageOut(node: Element, { active }: { active: boolean }) {
     const o = +getComputedStyle(node).opacity
 

@@ -77,6 +77,7 @@
   <title>{title} | Moon Blog</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={title} />
+  <meta property="og:url" content={origin} />
   <meta property="og:type" content="website" />
   <meta property="og:image" content={resolveUrl(image.url)} />
   <meta property="og:site_name" content="Moon Blog" />

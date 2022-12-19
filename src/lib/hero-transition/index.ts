@@ -59,7 +59,8 @@ export function crossfade2({
   function crossfade(
     from: DOMRect,
     node: Element,
-    params: CrossfadeParams
+    params: CrossfadeParams,
+    intro: boolean
   ): TransitionConfig {
     const {
       delay = 0,
@@ -89,6 +90,7 @@ export function crossfade2({
       duration: is_function(duration) ? duration(d) : duration,
       easing,
       tick: (t, u) => {
+        if (!intro) return
         node.setAttribute(
           "style",
           currentStyle +
@@ -120,7 +122,7 @@ export function crossfade2({
           const { rect } = counterparts.get(params.key)!
           counterparts.delete(params.key)
 
-          return crossfade(rect, node, params)
+          return crossfade(rect, node, params, intro)
         }
 
         // if the node is disappearing altogether

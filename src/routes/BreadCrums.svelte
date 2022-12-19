@@ -1,12 +1,5 @@
 <script lang="ts">
-  import { Breadcrumbs } from "stwui"
-
   export let pathname: string
-
-  interface Crumb {
-    label: string
-    href: string
-  }
 
   function resovleLabel(path: string) {
     if (!path) return "Home"

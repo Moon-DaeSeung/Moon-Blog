@@ -57,7 +57,7 @@ export function crossfade2({
   const to_send: ClientRectMap = new Map()
 
   function crossfade(
-    from: ClientRect,
+    from: DOMRect,
     node: Element,
     params: CrossfadeParams
   ): TransitionConfig {
@@ -68,25 +68,38 @@ export function crossfade2({
     } = assign(assign({}, defaults), params)
 
     const to = node.getBoundingClientRect()
-    const dx = from.left - to.left
-    const dy = from.top - to.top
-    const dw = from.width / to.width
-    const dh = from.height / to.height
-    const d = Math.sqrt(dx * dx + dy * dy)
 
     const style = getComputedStyle(node)
     const transform = style.transform === "none" ? "" : style.transform
 
+    let dx = from.left - to.left - (document.scrollingElement?.scrollLeft || 0)
+    let dy = from.top - to.top - (document.scrollingElement?.scrollTop || 0)
+    requestAnimationFrame(() => {
+      dx += document.scrollingElement?.scrollLeft || 0
+      dy += document.scrollingElement?.scrollTop || 0
+    })
+
+    const dw = from.width / to.width
+    const dh = from.height / to.height
+    const d = Math.sqrt(dx * dx + dy * dy)
+
+    const currentStyle = node.getAttribute("style")
     return {
       delay,
       duration: is_function(duration) ? duration(d) : duration,
       easing,
-      css: (t, u) => `
-				transform-origin: top left;
-				transform: ${transform} translate(${u * dx}px,${u * dy}px) scale(${
-        t + (1 - t) * dw
-      }, ${t + (1 - t) * dh});
-			`,
+      tick: (t, u) => {
+        node.setAttribute(
+          "style",
+          currentStyle +
+            `
+              transform-origin: top left;
+              transform: ${transform} translate(${u * dx}px,${
+              u * dy
+            }px) scale(${t + (1 - t) * dw}, ${t + (1 - t) * dh});
+        `
+        )
+      },
     }
   }
 
@@ -97,10 +110,6 @@ export function crossfade2({
   ) {
     return (node: Element, params: CrossfadeParams & { key: any }) => {
       const rect = node.getBoundingClientRect()
-      // natural transition trick
-      rect.y -= document.scrollingElement?.scrollTop || 0
-      rect.x -= document.scrollingElement?.scrollLeft || 0
-      //
       items.set(params.key, {
         rect,
       })
@@ -129,4 +138,5 @@ export function crossfade2({
     transition(to_receive, to_send, true),
   ]
 }
+
 type ClientRectMap = Map<any, { rect: DOMRect }>

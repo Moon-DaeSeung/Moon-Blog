@@ -1,14 +1,15 @@
 import type { LayoutServerLoad } from "./$types"
-export const prerender = true
+// export const prerender = true
 
 export const load: LayoutServerLoad = async ({ url: { pathname, origin } }) => {
   return {
     pathname,
+    origin,
     defaultMeta: {
-      title: "Welcom",
-      description: "나의 일상을 적는 곳!",
+      title: "안녕!",
+      description: "문대승의 이것저것 블로그",
       image: {
-        url: `${origin}/assets/thumbnail.jpg`,
+        url: "/thumbnail.jpg",
         alt: "van gogh",
       },
     },

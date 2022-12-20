@@ -6,8 +6,8 @@ export const load: LayoutServerLoad = async ({ url: { pathname, origin } }) => {
     pathname,
     origin,
     defaultMeta: {
-      title: "Welcom",
-      description: "나의 일상을 적는 곳!",
+      title: "안녕!",
+      description: "문대승의 이것저것 블로그",
       image: {
         url: "/thumbnail.jpg",
         alt: "van gogh",

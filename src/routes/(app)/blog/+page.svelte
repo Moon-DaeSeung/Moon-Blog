@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { page } from "$app/stores"
   import autoAnimate from "$lib/auto-animate"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
-  let posts = $page.data.posts
+  import posts from "./posts"
 </script>
 
 <section class="flex flex-col flex-grow">

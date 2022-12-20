@@ -4,7 +4,7 @@ import Playground from "./playground/+page.svelte"
 import About from "./about/+page.svelte"
 import HOME from "./+page.svelte"
 import Blog from "./blog/+page.svelte"
-import idAndSlugs from "../notion2svelte_id-to-slug.json"
+import idAndSlugs from "../../notion2svelte_id-to-slug.json"
 
 const routes: {
   [key: string]: {
@@ -37,13 +37,14 @@ const routes: {
     notTransitionWith: [],
   },
 }
-
 const blogs = await Promise.all(
   idAndSlugs
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .map(([_, slug]) => slug)
     .map(async (slug) => {
-      const page = await (await import(`./blog/${slug}/+page.svelte`)).default
+      console.log(slug)
+      const path = `./blog/${slug}/+page.svelte`
+      const page = await (await import(path)).default
       return {
         path: `/blog/${slug}`,
         page,
@@ -51,6 +52,26 @@ const blogs = await Promise.all(
       }
     })
 )
+
+export async function getRoutes(): Promise<{
+  [key: string]: { page: any; notTransitionWith: string[] }
+}> {
+  const result = {
+    ...routes,
+    "/blog": {
+      ...routes["/blog"],
+      notTransitionWith: blogs.map(({ path }) => path),
+    },
+    ...blogs.reduce(
+      (acc, { path, page, notTransitionWith }) => ({
+        ...acc,
+        [path]: { page, notTransitionWith },
+      }),
+      {}
+    ),
+  }
+  return result
+}
 
 export default {
   ...routes,

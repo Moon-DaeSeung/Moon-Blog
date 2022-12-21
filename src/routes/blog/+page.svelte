@@ -4,6 +4,11 @@
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   let posts = $page.data.posts
   let toggle = false
+
+  $: {
+    ;[toggle]
+    posts = [...posts].reverse()
+  }
 </script>
 
 <section class="flex flex-col flex-grow">
@@ -14,7 +19,7 @@
       {@const href = "/blog/" + slug}
       <li
         id={slug}
-        class="flex flex-col w-full flex-grow md:max-w-[320px] border shadow-md"
+        class="flex flex-col w-full flex-grow md:max-w-[320px] border shadow-md bg-white"
       >
         <article>
           <a {href}>

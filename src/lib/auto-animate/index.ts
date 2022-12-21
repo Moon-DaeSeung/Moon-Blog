@@ -71,8 +71,16 @@ const handleMutations: MutationCallback = (mutations) => {
  */
 const handleResizes: ResizeObserverCallback = (entries) => {
   entries.forEach((entry) => {
-    if (entry.target === root) updateAllPos()
-    if (coords.has(entry.target)) updatePos(entry.target)
+    const { target } = entry
+    if (target === root) updateAllPos()
+    if (coords.has(target)) updatePos(entry.target)
+    if (parents.has(target)) {
+      for (let i = 0; i < target.children.length; ++i) {
+        const child = target.children.item(i)
+        if (!child) continue
+        remain(child)
+      }
+    }
   })
 }
 
@@ -118,7 +126,8 @@ function observePosition(el: Element) {
  * Update the exact position of a given element.
  * @param el - An element to update the position of.
  */
-function updatePos(el: Element) {
+function updatePos(el: Element, immediate = false) {
+  if (immediate) return coords.set(el, getCoords(el))
   clearTimeout(debounces.get(el))
   const optionsOrPlugin = getOptions(el)
   const delay =
@@ -183,6 +192,7 @@ function lowPriority(callback: CallableFunction) {
  * The mutation observer responsible for watching each root element.
  */
 let mutations: MutationObserver | undefined
+let parentMutations: MutationObserver | undefined
 
 /**
  * A resize observer, responsible for recalculating elements on resize.
@@ -195,6 +205,9 @@ let resize: ResizeObserver | undefined
 if (typeof window !== "undefined") {
   root = document.documentElement
   mutations = new MutationObserver(handleMutations)
+  parentMutations = new MutationObserver((mutationRecords) => {
+    mutationRecords.forEach(({ target }) => {})
+  })
   resize = new ResizeObserver(handleResizes)
   resize.observe(root)
 }
@@ -408,7 +421,7 @@ function remain(el: Element) {
   }
   animations.set(el, animation)
   coords.set(el, newCoords)
-  animation.addEventListener("finish", updatePos.bind(null, el))
+  animation.addEventListener("finish", updatePos.bind(null, el, false))
 }
 
 /**
@@ -437,7 +450,7 @@ function add(el: Element) {
     animation.play()
   }
   animations.set(el, animation)
-  animation.addEventListener("finish", updatePos.bind(null, el))
+  animation.addEventListener("finish", updatePos.bind(null, el, false))
 }
 
 /**
@@ -576,8 +589,21 @@ export default function autoAnimate(
     } else {
       options.set(el, { duration: 250, easing: "ease-in-out", ...config })
     }
-    mutations.observe(el, { childList: true })
+    mutations.observe(el, {
+      childList: true,
+      attributeFilter: ["class", "style"],
+    })
+    for (let i = 0; i < el.children.length; ++i) {
+      const child = el.children.item(i)
+      if (!child) continue
+      updatePos(child, true)
+    }
     parents.add(el)
+  }
+  return {
+    destroy() {
+      mutations?.disconnect()
+    },
   }
 }
 

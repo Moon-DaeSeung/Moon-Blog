@@ -14,6 +14,7 @@
   import MediaQuery from "$lib/component/MediaQuery.svelte"
   import MediaQueryUtils from "$lib/util/MediaQueryUtils"
   import { mobile, laptop } from "./pageTransition"
+  import { fade } from "svelte/transition"
 
   let matches = false
 
@@ -88,11 +89,11 @@
 
 <MediaQuery query={MediaQueryUtils.laptop} bind:matches />
 
-<div class="app ">
+<div class="app">
   <Header />
   <MediaQuery query={MediaQueryUtils.laptop} let:matches>
     {#if matches}
-      <div class="constraint-wrapper mt-4 mb-16">
+      <div class="constraint-wrapper mt-4 mb-16" transition:fade|local>
         <div class="constraint">
           <BreadCrums {pathname} />
         </div>

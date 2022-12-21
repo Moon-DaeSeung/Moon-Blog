@@ -570,7 +570,6 @@ export default function autoAnimate(
     if (getComputedStyle(el).position === "static") {
       Object.assign(el.style, { position: "relative" })
     }
-    resize.observe(el)
     forEach(el, updatePos, poll, (element) => resize?.observe(element))
     if (typeof config === "function") {
       options.set(el, config)

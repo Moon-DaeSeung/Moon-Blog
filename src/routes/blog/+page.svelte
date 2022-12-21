@@ -3,10 +3,12 @@
   import autoAnimate from "$lib/auto-animate"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   let posts = $page.data.posts
+  let toggle = false
 </script>
 
 <section class="flex flex-col flex-grow">
   <div class="pb-4 border-b mt-4 lg:mt-0">BLOG</div>
+  <button class="btn" on:click={() => (toggle = !toggle)}>toggle</button>
   <ul class="card-list" use:autoAnimate>
     {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}

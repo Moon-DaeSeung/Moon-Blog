@@ -93,7 +93,7 @@
   <Header />
   <MediaQuery query={MediaQueryUtils.laptop} let:matches>
     {#if matches}
-      <div class="constraint-wrapper mt-4 mb-16" transition:fade|local>
+      <div class="constraint-wrapper mt-4 mb-16">
         <div class="constraint">
           <BreadCrums {pathname} />
         </div>

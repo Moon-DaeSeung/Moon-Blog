@@ -9,6 +9,14 @@ interface Coordinates {
   height: number
 }
 /**
+ * Used to sign an element as the target.
+ */
+const TGT = "__aa_tgt"
+/**
+ * Used to sign an element as being part of a removal.
+ */
+const DEL = "__aa_del"
+/**
  * A function that automatically adds animation effects to itself and its
  * immediate children. Specifically it adds effects for adding, moving, and
  * removing DOM elements.
@@ -62,20 +70,12 @@ const autoAnimate: Action<HTMLElement, undefined> = (
    * The document used to calculate transitions.
    */
   let root: HTMLElement
-  /**
-   * Used to sign an element as the target.
-   */
-  const TGT = "__aa_tgt"
-  /**
-   * Used to sign an element as being part of a removal.
-   */
-  const DEL = "__aa_del"
 
   /**
    * Callback for handling all mutations.
    * @param mutations - A mutation list
    */
-  const handleMutations: MutationCallback = (mutations, a) => {
+  const handleMutations: MutationCallback = (mutations) => {
     const elements = getElements(mutations)
     // If elements is "false" that means this mutation that should be ignored.
     if (elements) {
@@ -291,13 +291,10 @@ const autoAnimate: Action<HTMLElement, undefined> = (
       animations.get(el)?.cancel()
     }
     if (preExisting && isMounted) {
-      console.log("remain")
       remain(el)
     } else if (preExisting && !isMounted) {
-      console.log("remove")
       remove(el)
     } else {
-      console.log("add")
       add(el)
     }
   }
@@ -520,11 +517,6 @@ const autoAnimate: Action<HTMLElement, undefined> = (
     } else {
       options.set(el, { duration: 250, easing: "ease-in-out", ...config })
     }
-    // for (let i = 0; i < el.children.length; ++i) {
-    //   const child = el.children.item(i)
-    //   if (!child) continue
-    //   updatePos(child, true)
-    // }
     forEach(el, updatePos, poll, (element) => resize?.observe(element))
     parents.add(el)
 

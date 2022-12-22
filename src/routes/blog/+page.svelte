@@ -3,32 +3,25 @@
   import autoAnimate from "$lib/auto-animate"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   let posts = $page.data.posts
-  let toggle = false
-
-  $: {
-    ;[toggle]
-    posts = [...posts].reverse()
-  }
 </script>
 
 <section class="flex flex-col flex-grow">
-  <div class="pb-4 border-b mt-4 lg:mt-0">BLOG</div>
-  <button class="btn" on:click={() => (toggle = !toggle)}>toggle</button>
+  <div class="pb-4 mt-4 border-b lg:mt-0">BLOG</div>
   <ul class="card-list" use:autoAnimate>
     {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}
       <li
         id={slug}
-        class="flex flex-col w-full flex-grow md:max-w-[320px] border shadow-md bg-white"
+        class="flex w-full flex-grow flex-col border bg-white shadow-md md:max-w-[320px]"
       >
         <article>
           <a {href}>
             <HeroImage src={image.url} height="200px" />
           </a>
-          <div class="px-6 py-7 h-[360px] flex flex-col">
-            <div class="flex gap-3 mt-6 justify-center">
+          <div class="flex h-[360px] flex-col px-6 py-7">
+            <div class="flex justify-center gap-3 mt-6">
               {#each hashtags as { name }}
-                <div class="badge badge-outline">{name}</div>
+                <div class="badge-outline badge">{name}</div>
               {/each}
             </div>
             <h2 class="mt-4">
@@ -36,13 +29,13 @@
                 {title}
               </a>
             </h2>
-            <time class="mt-2 flex justify-end text-xs text-base-300">
+            <time class="flex justify-end mt-2 text-xs text-base-300">
               {time}
             </time>
             <p class="mt-5 text-center">
               {description}
             </p>
-            <a {href} class="btn btn-primary rounded-2xl mx-auto mt-auto">
+            <a {href} class="mx-auto mt-auto btn-primary btn rounded-2xl">
               READ MORE
             </a>
           </div>
@@ -54,7 +47,7 @@
 
 <style>
   h2 {
-    @apply text-[22px] leading-7 text-center;
+    @apply text-center text-[22px] leading-7;
   }
 
   p {
@@ -65,7 +58,7 @@
   }
 
   .card-list {
-    @apply flex flex-wrap relative w-full gap-10 mt-9 mx-auto;
+    @apply relative mx-auto mt-9 flex w-full flex-wrap gap-10;
     /* gap-9 */
   }
 

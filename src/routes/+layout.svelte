@@ -87,14 +87,14 @@
   <meta name="twitter:image:alt" content={image.alt} />
 </svelte:head>
 
-<MediaQuery query={MediaQueryUtils.laptop} bind:matches />
+<MediaQuery query={MediaQueryUtils.tablet} bind:matches />
 
 <div class="app">
   <Header />
-  <MediaQuery query={MediaQueryUtils.laptop} let:matches>
+  <MediaQuery query={MediaQueryUtils.tablet} let:matches>
     {#if matches}
-      <div class="constraint-wrapper mt-4 mb-16">
-        <div class="constraint">
+      <div class="mt-4 mb-16 constraint-wrapper">
+        <div class="px-4 constraint lg:px-6">
           <BreadCrums {pathname} />
         </div>
       </div>
@@ -109,18 +109,18 @@
         out:pageOut={{ active: !current.notTransitionWith.includes(from) }}
       >
         <div class="constraint-wrapper content">
-          <div class="constraint content lg:px-6 px-4">
+          <div class="px-4 constraint content lg:px-6">
             <svelte:component this={current.page} />
           </div>
         </div>
       </div>
     {/key}
   </main>
-  <footer class="fixed bottom-0 lg:static w-full">
-    <MediaQuery query={MediaQueryUtils.laptop} let:matches>
+  <footer class="fixed bottom-0 w-full lg:static">
+    <MediaQuery query={MediaQueryUtils.tablet} let:matches>
       {#if !matches}
-        <nav class="shadow-md border-t w-full bg-white">
-          <ul class="relative flex justify-around items-center gap-12 p-2">
+        <nav class="w-full bg-white border-t shadow-md">
+          <ul class="relative flex items-center justify-around gap-12 p-2">
             {#each navigators as { href, name, iconClass }}
               {@const active =
                 (pathname === "/" && href === "/") ||
@@ -148,11 +148,11 @@
 
 <style>
   .app {
-    @apply flex flex-col min-h-screen;
+    @apply flex min-h-screen flex-col;
   }
 
   main {
-    @apply w-full relative flex-1 flex flex-col;
+    @apply relative flex w-full flex-1 flex-col;
   }
 
   .transition-area {
@@ -160,7 +160,7 @@
   }
 
   .content {
-    @apply flex flex-col flex-grow;
+    @apply flex flex-grow flex-col;
   }
 
   .constraint-wrapper {

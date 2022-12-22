@@ -26,15 +26,15 @@
 </script>
 
 <header
-  class="lg:px bg-white z-50 lg:static sticky top-0 px-4 flex justify-between lg:h-24 h-16 items-center shadow-sm border-b w-full"
+  class="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 bg-white border-b shadow-sm lg:px lg:static lg:h-24"
 >
   <div>
     <a href="/" class="text-2xl">Moon Blog</a>
   </div>
-  <MediaQuery query={MediaQueryUtils.laptop} let:matches>
+  <MediaQuery query={MediaQueryUtils.tablet} let:matches>
     {#if matches}
       <nav class="flex justify-center">
-        <ul class="relative flex justify-center h-12 items-center gap-6">
+        <ul class="relative flex items-center justify-center h-12 gap-6">
           {#each navigators as { href, name }}
             <li aria-current={pathname.includes(href)}>
               {#if (pathname === "/" && href === "/") || (href !== "/" && pathname.includes(href))}

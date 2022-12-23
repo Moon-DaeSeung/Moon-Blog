@@ -1,9 +1,9 @@
 <script lang="ts">
+  import ParticleBackground from "$lib/component/animatedbackground/particle/index.svelte"
 </script>
 
-<section>
-  <h1>안녕하세요 문대승의 블로그 입니다.</h1>
-  <p>아직 만들고 있어요..</p>
+<section class="h-full min-h-full flex-grow">
+  <ParticleBackground offset={{ start: 200, end: 200 }} />
 </section>
 
 <style>

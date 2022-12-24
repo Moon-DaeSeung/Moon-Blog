@@ -75,9 +75,11 @@ export function crossfade2({
 
     let dx = from.left - to.left - (document.scrollingElement?.scrollLeft || 0)
     let dy = from.top - to.top - (document.scrollingElement?.scrollTop || 0)
+    let ready = false
     requestAnimationFrame(() => {
       dx += document.scrollingElement?.scrollLeft || 0
       dy += document.scrollingElement?.scrollTop || 0
+      ready = true
     })
 
     const dw = from.width / to.width
@@ -94,7 +96,7 @@ export function crossfade2({
         node.setAttribute(
           "style",
           currentStyle +
-            `
+            ` ${ready ? "diplay: none;" : ""}
               position: relative; 
               z-index: 9999; 
               transform-origin: top left;

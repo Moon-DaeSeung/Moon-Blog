@@ -181,7 +181,7 @@
   }
 
   main {
-    @apply relative flex w-full flex-1 flex-col;
+    @apply flex w-full flex-1 flex-col;
   }
 
   .transition-area {

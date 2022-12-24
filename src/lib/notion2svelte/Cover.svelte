@@ -43,7 +43,7 @@
 <style>
   .cover {
     position: absolute;
-    top: 0;
+    top: 40;
     left: 0;
     width: 100%;
     overflow: hidden;

@@ -15,10 +15,17 @@ export const laptop = {
   },
   pageIn(node: Element, { active }: { active: boolean }) {
     const o = +getComputedStyle(node).opacity
+    if (!active) {
+      return {
+        delay: 0,
+        duration: 0,
+        css: () => "",
+      }
+    }
 
     return {
-      delay: active ? 250 : 0,
-      duration: active ? 200 : 0,
+      delay: 250,
+      duration: 200,
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 20}px);`,
     }

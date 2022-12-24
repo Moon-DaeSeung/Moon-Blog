@@ -41,7 +41,7 @@ const routes: {
 const blogs = await Promise.all(
   idAndSlugs
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    .map(([_, slug]) => slug)
+    .map((config) => config[1])
     .map(async (slug) => {
       const page = await (await import(`./blog/${slug}/+page.svelte`)).default
       return {

@@ -6,21 +6,28 @@ export const laptop = {
 
     return {
       delay: 0,
-      duration: active ? 250 : 0,
+      duration: active ? 200 : 0,
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${
-          -cubicOut(u) * 40
+          -cubicOut(u) * 0
         }px); z-index: -1; position: absolute;`,
     }
   },
   pageIn(node: Element, { active }: { active: boolean }) {
     const o = +getComputedStyle(node).opacity
+    if (!active) {
+      return {
+        delay: 0,
+        duration: 0,
+        css: () => "",
+      }
+    }
 
     return {
-      delay: active ? 300 : 0,
-      duration: active ? 250 : 0,
+      delay: 250,
+      duration: 200,
       css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 40}px);`,
+        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 20}px);`,
     }
   },
 }

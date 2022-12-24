@@ -26,15 +26,15 @@
 </script>
 
 <header
-  class="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 bg-white border-b shadow-sm lg:px lg:static lg:h-24"
+  class="lg:px sticky top-0 z-50 flex h-16 w-full items-center  border-b bg-white px-4 shadow-sm lg:relative lg:h-24 "
 >
-  <div>
+  <div class="absolute left-24">
     <a href="/" class="text-2xl">Moon Blog</a>
   </div>
   <MediaQuery query={MediaQueryUtils.tablet} let:matches>
     {#if matches}
-      <nav class="flex justify-center">
-        <ul class="relative flex items-center justify-center h-12 gap-6">
+      <nav class="mx-auto flex justify-center">
+        <ul class="relative flex h-12 items-center justify-center gap-6">
           {#each navigators as { href, name }}
             <li aria-current={pathname.includes(href)}>
               {#if (pathname === "/" && href === "/") || (href !== "/" && pathname.includes(href))}
@@ -52,7 +52,7 @@
     {/if}
   </MediaQuery>
 
-  <div class="w-8 aspect-square">
+  <div class="absolute right-8 aspect-square w-8">
     <a href="https://github.com/Moon-DaeSeung/Moon-Blog">
       <img src={github} alt="GitHub" />
     </a>
@@ -66,7 +66,7 @@
 
   .indicator {
     --size: 6px;
-    @apply w-0 h-0 absolute top-0 content-[""];
+    @apply absolute top-0 h-0 w-0 content-[""];
     left: calc(50% - var(--size));
     border: var(--size) solid transparent;
     border-top: var(--size) solid hsl(var(--p));

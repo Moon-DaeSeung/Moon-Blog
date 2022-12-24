@@ -2,7 +2,7 @@ export class Particle {
   steps: number
   x: number
   y: number
-  rotation: "+" | "-" = Math.random() > 0.5 ? "-" : "+"
+  rotationDirection = Math.random() > 0.5 ? -1 : 1
   scale: number = 0.5 + Math.random()
   siner: number = 200 * Math.random()
   item: SVGElement
@@ -10,7 +10,11 @@ export class Particle {
   height = 0
   destroyed = false
 
-  constructor(private container: HTMLElement, private friction: number, private offset: {start: number, end: number}) {
+  constructor(
+    private container: HTMLElement,
+    private friction: number,
+    private offset: { start: number; end: number }
+  ) {
     this.steps = container.clientHeight / 2
     this.friction = friction
     const { item, width, height } = this.render()
@@ -44,9 +48,10 @@ export class Particle {
 
     this.item.setAttribute(
       "style",
-      `${style} transform: translate(${left}px, ${top}px) scale(${
-        this.scale
-      }) rotate(${this.y + this.height}deg);`
+      `${style} transform: 
+      translate(${left}px, ${top}px)
+      scale(${this.scale}) 
+      rotate(${-this.rotationDirection * (this.y + this.height)}deg);`
     )
 
     if (this.y < -(this.height + this.offset.end)) {

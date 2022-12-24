@@ -4,7 +4,7 @@
   import ErrorPage from "./+error.svelte"
   import { page } from "$app/stores"
   import type { LayoutServerData } from "./$types"
-  import { beforeNavigate } from "$app/navigation"
+  import { afterNavigate, beforeNavigate, goto } from "$app/navigation"
   import BreadCrums from "./BreadCrums.svelte"
   import routes from "./routes"
   import { onMount } from "svelte"
@@ -18,6 +18,33 @@
   let matches = false
 
   $: ({ pageIn, pageOut } = matches ? laptop : mobile)
+
+  let scrollHistory: Record<string, number> = {}
+
+  afterNavigate(({ to, from }) => {
+    if (!to || !from) return
+    const scrollTop = scrollHistory[to.url.pathname]
+    if (!scrollTop) return
+    scrollHistory = {} as Record<string, number>
+    //nested 된 경우만
+    if (from.url.pathname.includes(to.url.pathname)) {
+      document.scrollingElement?.scrollTo({ top: scrollTop })
+    }
+  })
+
+  beforeNavigate(({ from, to }) => {
+    if (!from) return
+    const {
+      url: { pathname },
+    } = from
+    const scrollElement = document.scrollingElement
+    if (!scrollElement) return
+    scrollHistory[pathname] = scrollElement.scrollTop
+
+    if (pathname !== "/blog" && pathname.includes("/blog")) {
+      scrollElement.scrollTo({ top: 0 })
+    }
+  })
 
   const navigators = [
     {
@@ -154,7 +181,7 @@
   }
 
   main {
-    @apply relative flex w-full flex-1 flex-col;
+    @apply flex w-full flex-1 flex-col;
   }
 
   .transition-area {

@@ -100,7 +100,7 @@
       </div>
     {/if}
   </MediaQuery>
-  <main class="pb-[100px] lg:pb-0">
+  <main class="pb-[100px]">
     {#key $page.url.pathname}
       <div
         id={pathname}
@@ -139,7 +139,7 @@
         </nav>
       {:else}
         <div
-          class="flex h-[200px] flex-col items-center justify-center bg-blue-50"
+          class="flex h-[200px] flex-col items-center justify-center bg-accent text-white"
         >
           <p>
             contact:

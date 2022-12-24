@@ -17,7 +17,7 @@ export const laptop = {
     const o = +getComputedStyle(node).opacity
 
     return {
-      delay: 300,
+      delay: active ? 300 : 0,
       duration: active ? 250 : 0,
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 40}px);`,

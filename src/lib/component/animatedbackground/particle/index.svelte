@@ -60,7 +60,7 @@
   })
 </script>
 
-<div bind:this={containerEl} class="absolute top-0 left-0 h-full w-full" />
+<div bind:this={containerEl} class="absolute -z-20 top-0 left-0 h-full w-full" />
 
 <style>
   :global([data-shape="pentahedron"]) {

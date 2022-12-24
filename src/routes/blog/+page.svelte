@@ -1,13 +1,12 @@
 <script lang="ts">
   import { page } from "$app/stores"
-  import autoAnimate from "$lib/auto-animate"
   import HeroImage from "$lib/notion2svelte/HeroImage.svelte"
   let posts = $page.data.posts
 </script>
 
-<section class="flex flex-col flex-grow">
-  <div class="pb-4 mt-4 border-b lg:mt-0">BLOG</div>
-  <ul class="card-list" use:autoAnimate>
+<section class="flex flex-grow flex-col">
+  <div class="mt-4 border-b pb-4 lg:mt-0">BLOG</div>
+  <ul class="card-list">
     {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}
       <li
@@ -19,7 +18,7 @@
             <HeroImage src={image.url} height="200px" />
           </a>
           <div class="flex h-[360px] flex-col px-6 py-7">
-            <div class="flex justify-center gap-3 mt-6">
+            <div class="mt-6 flex justify-center gap-3">
               {#each hashtags as { name }}
                 <div class="badge-outline badge">{name}</div>
               {/each}
@@ -29,13 +28,13 @@
                 {title}
               </a>
             </h2>
-            <time class="flex justify-end mt-2 text-xs text-base-300">
+            <time class="mt-2 flex justify-end text-xs text-base-300">
               {time}
             </time>
             <p class="mt-5 text-center">
               {description}
             </p>
-            <a {href} class="mx-auto mt-auto btn-primary btn rounded-2xl">
+            <a {href} class="btn-primary btn mx-auto mt-auto rounded-2xl">
               READ MORE
             </a>
           </div>
@@ -59,20 +58,13 @@
 
   .card-list {
     @apply relative mx-auto mt-9 flex w-full flex-wrap gap-10;
-    /* gap-9 */
   }
-
-  /* @media (min-width: 447px) {
-    .card-list {
-      max-width: 415px;
-    }
-  }
-*/
 
   /* 카드가 두줄일때 */
   @media (max-width: 1088px) {
     .card-list {
       max-width: 680px;
+      gap: 40px;
     }
   }
 </style>

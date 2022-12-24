@@ -89,37 +89,37 @@
 
 <MediaQuery query={MediaQueryUtils.tablet} bind:matches />
 
-<div class="app">
+<div class="app overflow-hidden">
   <Header />
   <MediaQuery query={MediaQueryUtils.tablet} let:matches>
     {#if matches}
-      <div class="mt-4 mb-16 constraint-wrapper">
-        <div class="px-4 constraint lg:px-6">
+      <div class="constraint-wrapper mt-4 mb-16">
+        <div class="constraint px-4 lg:px-6">
           <BreadCrums {pathname} />
         </div>
       </div>
     {/if}
   </MediaQuery>
-  <main class="overflow-hidden pb-[100px] lg:pb-0">
-    {#key pathname}
+  <main class="pb-[100px]">
+    {#key $page.url.pathname}
       <div
         id={pathname}
         class="transition-area content"
         in:pageIn={{ active: !current.notTransitionWith.includes(from) }}
         out:pageOut={{ active: !current.notTransitionWith.includes(from) }}
       >
-        <div class="constraint-wrapper content">
-          <div class="px-4 constraint content lg:px-6">
+        <div class="constraint-wrapper content ">
+          <div class="constraint content px-4 lg:px-6">
             <svelte:component this={current.page} />
           </div>
         </div>
       </div>
     {/key}
   </main>
-  <footer class="fixed bottom-0 w-full lg:static">
+  <footer class="w-full">
     <MediaQuery query={MediaQueryUtils.tablet} let:matches>
       {#if !matches}
-        <nav class="w-full bg-white border-t shadow-md">
+        <nav class="fixed bottom-0 w-full border-t bg-white shadow-md">
           <ul class="relative flex items-center justify-around gap-12 p-2">
             {#each navigators as { href, name, iconClass }}
               {@const active =
@@ -138,9 +138,15 @@
           </ul>
         </nav>
       {:else}
-        <p>
-          visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
-        </p>
+        <div
+          class="flex h-[200px] flex-col items-center justify-center bg-accent text-white"
+        >
+          <p>
+            contact:
+            <br />
+            tmdeoans@snu.ac.kr
+          </p>
+        </div>
       {/if}
     </MediaQuery>
   </footer>

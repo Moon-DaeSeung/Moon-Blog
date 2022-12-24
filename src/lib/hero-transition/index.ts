@@ -91,6 +91,7 @@ export function crossfade2({
       easing,
       tick: (t, u) => {
         if (!intro) return
+
         node.setAttribute(
           "style",
           currentStyle +

@@ -16,7 +16,6 @@
     --column-width: 42rem;
     --column-margin-top: 4rem;
     font-family: var(--font-body);
-    color: var(--color-text);
     overflow-y: scroll;
     overflow-x: hidden;
   }
@@ -25,25 +24,6 @@
     min-height: 100vh;
     margin: 0;
     background-attachment: fixed;
-  }
-
-  h1,
-  h2,
-  p {
-    font-weight: 400;
-  }
-
-  p {
-    line-height: 1.5;
-  }
-
-  h1 {
-    font-size: 2rem;
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 1rem;
   }
 
   pre {

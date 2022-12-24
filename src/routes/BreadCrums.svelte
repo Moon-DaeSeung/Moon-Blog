@@ -27,17 +27,36 @@
   ]
 </script>
 
-<div class="text-sm breadcrumbs">
+<div class="breadcrumbs text-sm">
   <ul>
     {#each crumbs as { label, href }, i}
       {@const isLast = i === crumbs.length - 1}
-      <li><a disabled={isLast} {href}>{label}</a></li>
+      <li><a class="" disabled={isLast} {href}>{label}</a></li>
     {/each}
   </ul>
 </div>
 
 <style>
   a[disabled="true"] {
-    @apply opacity-50 pointer-events-none;
+    @apply pointer-events-none opacity-50;
+  }
+
+  a {
+    @apply relative;
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    text-decoration: none;
+  }
+
+  a::before {
+    @apply absolute bottom-0.5 left-0 block h-[1px] w-full bg-base-content content-[''];
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  a:hover::before {
+    transform: scaleX(1);
   }
 </style>

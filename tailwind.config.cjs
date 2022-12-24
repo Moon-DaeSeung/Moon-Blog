@@ -5,7 +5,7 @@ module.exports = {
     "./node_modules/stwui/**/*.{svelte,js,ts,html}",
   ],
   daisyui: {
-    themes: ["bumblebee"],
+    //themes: [""],
   },
   theme: {
     extend: {},

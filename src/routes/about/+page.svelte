@@ -42,7 +42,7 @@
       </li>
       <li>
         <span>만년필 2자루 보유</span>
-        <span class="text-sm opacity-50"> (Limited Ednition) </span>
+        <span class="text-sm opacity-50"> (Limited Edition) </span>
       </li>
     </ul>
   </div>

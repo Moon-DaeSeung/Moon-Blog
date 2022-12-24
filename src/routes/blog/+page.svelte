@@ -9,10 +9,7 @@
   <ul class="card-list">
     {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}
-      <li
-        id={slug}
-        class="flex w-full flex-grow flex-col border bg-white shadow-md md:max-w-[320px]"
-      >
+      <li id={slug} class="card">
         <article>
           <a {href}>
             <HeroImage src={image.url} height="200px" />
@@ -57,14 +54,17 @@
   }
 
   .card-list {
-    @apply relative mx-auto mt-9 flex w-full flex-wrap gap-10;
+    @apply mx-auto mt-9 grid w-full place-content-center gap-10;
+    grid-template-columns: repeat(auto-fit, 1fr);
   }
 
-  /* 카드가 두줄일때 */
-  @media (max-width: 1088px) {
+  @media (min-width: 640px) {
     .card-list {
-      max-width: 680px;
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, 320px);
     }
+  }
+
+  .card {
+    @apply flex flex-grow flex-col border bg-white shadow-md;
   }
 </style>

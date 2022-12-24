@@ -91,11 +91,12 @@ export function crossfade2({
       easing,
       tick: (t, u) => {
         if (!intro) return
-
         node.setAttribute(
           "style",
           currentStyle +
             `
+              position: relative; 
+              z-index: 9999; 
               transform-origin: top left;
               transform: ${transform} translate(${u * dx}px,${
               u * dy

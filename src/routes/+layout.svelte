@@ -14,7 +14,6 @@
   import MediaQuery from "$lib/component/MediaQuery.svelte"
   import MediaQueryUtils from "$lib/util/MediaQueryUtils"
   import { mobile, laptop } from "./pageTransition"
-  import { fade } from "svelte/transition"
 
   let matches = false
 
@@ -138,14 +137,11 @@
           </ul>
         </nav>
       {:else}
-        <div
-          class="flex h-[200px] flex-col items-center justify-center bg-accent text-white"
-        >
-          <p>
-            contact:
-            <br />
-            tmdeoans@snu.ac.kr
-          </p>
+        <div class="flex h-[200px] flex-col bg-accent text-white">
+          <div class="ml-auto mt-auto flex items-center p-4">
+            <img class="h-10 w-10" alt="blog icon" src="assets/blog_icon.gif" />
+            <p>moon blog</p>
+          </div>
         </div>
       {/if}
     </MediaQuery>

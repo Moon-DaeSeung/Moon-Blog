@@ -9,7 +9,7 @@ export const load: LayoutServerLoad = async ({ url: { pathname, origin } }) => {
       title: "안녕!",
       description: "문대승의 이것저것 블로그",
       image: {
-        url: "/thumbnail.jpg",
+        url: "/assets/profile.png",
         alt: "van gogh",
       },
     },

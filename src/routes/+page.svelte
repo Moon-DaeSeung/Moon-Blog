@@ -98,6 +98,6 @@
   }
 
   article {
-    @apply rounded-md;
+    @apply rounded-md shadow-inner;
   }
 </style>

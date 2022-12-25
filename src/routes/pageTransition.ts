@@ -6,10 +6,10 @@ export const laptop = {
 
     return {
       delay: 0,
-      duration: active ? 200 : 0,
+      duration: active ? 250 : 0,
       css: (t, u) =>
         `opacity: ${t * o}; transform: translateX(${
-          -cubicOut(u) * 0
+          -cubicOut(u) * 40
         }px); z-index: -1; position: absolute;`,
     }
   },
@@ -24,10 +24,10 @@ export const laptop = {
     }
 
     return {
-      delay: 250,
-      duration: 200,
+      delay: 300,
+      duration: 250,
       css: (t, u) =>
-        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 20}px);`,
+        `opacity: ${t * o}; transform: translateX(${cubicIn(u) * 40}px);`,
     }
   },
 }

@@ -28,7 +28,7 @@
 <header
   class="lg:px sticky top-0 z-50 flex h-16 w-full items-center  border-b bg-white px-4 shadow-sm lg:relative lg:h-24 "
 >
-  <div class="absolute left-24">
+  <div class="absolute md:left-9">
     <a href="/" class="text-2xl">Moon Blog</a>
   </div>
   <MediaQuery query={MediaQueryUtils.tablet} let:matches>

@@ -5,7 +5,7 @@
 </script>
 
 <section class="flex flex-grow flex-col">
-  <div class="mt-4 border-b pb-4 lg:mt-0">BLOG</div>
+  <div class="mt-4 border-b md:pb-4 md:mt-0">BLOG</div>
   <ul class="card-list">
     {#each posts as { title, description, time, slug, image, hashtags } (slug)}
       {@const href = "/blog/" + slug}

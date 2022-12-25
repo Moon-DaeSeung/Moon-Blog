@@ -6,7 +6,7 @@
 
 <section class="">
   <ParticleBackground offset={{ start: 200, end: 200 }} />
-  <h2 class="mb-8 border-b-2 py-2 md:text-7xl">
+  <h2 class="mb-8 border-b-2 mt-2 md:mt-0 pt-2 md:text-7xl">
     <span class="text-primary">Wellcome</span> Moon Blog!!
   </h2>
   <p class="md:mb-10 mb-2 md:text-2xl text-xl">저는 이런걸 만들고 있어요 :)</p>

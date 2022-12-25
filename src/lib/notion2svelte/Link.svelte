@@ -14,13 +14,11 @@
   /* Link styles largely cribbed from Matthew Butterick ↓ */
   /* https://practicaltypography.com/typography-in-ten-minutes.html */
   a {
-    text-decoration: none;
     color: inherit;
     transition-property: background;
     transition-duration: 0.2s;
   }
   a:hover {
-    color: hsl(120, 45%, 30%);
     background: hsl(120, 70%, 91%);
     transition-property: background;
     transition-duration: 0.2s;
@@ -67,23 +65,6 @@
   }
   a:hover.alias {
     background: hsl(310, 70%, 91%);
-  }
-
-  a.absolute:before,
-  a.absolute:after,
-  a:hover.absolute,
-  a:hover.absolute:before,
-  a:hover.absolute:after {
-    color: hsl(70, 33%, 46%);
-    transition-property: background;
-    transition-duration: 0.2s;
-    border-radius: 0.1rem;
-  }
-  a:hover.absolute {
-    background: hsl(70, 70%, 91%);
-  }
-  a.absolute::after {
-    content: '\FEFF°';
   }
 
   a:visited {

@@ -10,7 +10,7 @@ const [send, receive] = crossfade2({
   // https://svelte.dev/repl/a319a067d66e4b26b677ae94db22261c?version=3.31.0
   fallback: () =>
     ({
-      duration: 300,
+      duration: 0,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       tick(u: number, t: number) {
         //
